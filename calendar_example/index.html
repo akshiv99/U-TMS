@@ -11,8 +11,9 @@
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
-
+<iframe src="https://calendar.google.com/calendar/embed?src=ld8138069%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     <pre id="content" style="white-space: pre-wrap;"></pre>
+    <button onclick="createCalEvent()">Create</button>
 
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
@@ -132,13 +133,14 @@
         });
       }
 
+
     </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-    <button onclick="createEvent();">Create</button>
+     
   </body>
 </html>
 
