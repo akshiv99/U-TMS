@@ -1,14 +1,22 @@
-function createEvent(){
+var request;
+setTimeout( function(){
+  request = gapi.client.calendar.events.insert({
+    'calendarId': 'primary',
+    'resource': event
+  });
+ }, 1000
+);
+
 var event = {
-  'summary': 'Google I/O 2015',
+  'summary': 'Google I/O 2019',
   'location': '800 Howard St., San Francisco, CA 94103',
   'description': 'A chance to hear more about Google\'s developer products.',
   'start': {
-    'dateTime': '2019-03-11T09:00:00-07:00',
+    'dateTime': '2019-03-18T09:00:00',
     'timeZone': 'America/Los_Angeles'
   },
   'end': {
-    'dateTime': '2019-03-11T17:00:00-07:00',
+    'dateTime': '2019-03-18T17:00:00',
     'timeZone': 'America/Los_Angeles'
   },
   'recurrence': [
@@ -27,12 +35,9 @@ var event = {
   }
 };
 
-var request = gapi.client.calendar.events.insert({
-  'calendarId': 'primary',
-  'resource': event
-});
-
-request.execute(function(event) {
-  appendPre('Event created: ' + event.htmlLink);
-});}
+function createCalEvent(){
+  request.execute(function() {
+    appendPre('Event created!');
+  });
+}
 
