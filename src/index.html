@@ -1,5 +1,43 @@
 <!DOCTYPE html>
 <html>
+        <style>
+                        * {
+                                box-sizing: border-box;
+                        }
+                        
+                        #myInput {
+                                background-image: url('/css/searchicon.png');
+                                background-position: 10px 12px;
+                                background-repeat: no-repeat;
+                                width: 100%;
+                                font-size: 16px;
+                                padding: 12px 20px 12px 40px;
+                                border: 1px solid #ddd;
+                                margin-bottom: 12px;
+                        }
+                        
+                        #myUL {
+                                list-style-type: none;
+                                padding: 0;
+                                margin: 0;
+                        }
+                        
+                        #myUL li a {
+                                
+                                border: 1px solid #ddd;
+                                margin-top: -1px; /* Prevent double borders */
+                                background-color: #f6f6f6;
+                                padding: 12px;
+                                text-decoration: none;
+                                font-size: 18px;
+                                color: black;
+                                display: block
+                        }
+                        
+                        #myUL li a:hover:not(.header) {
+                                background-color: #eee;
+                        }
+                        </style>
         <head>
                 <meta charset="utf-8">
                 <title>Page Title</title>
@@ -37,9 +75,21 @@
                                                         <label class="form-check-label" for="exampleRadios1">
                                                                 Always Sleepy Sloth
                                                         </label>
+                                                <label>What</label>
                                                 </div>
                                         </div>
                                 </form>
+                                
+                                <input type="text" id="myInput" onkeyup="searchfunc()" placeholder="Search for courses in the list." title="Type in a name">
+                                <ul id="myUL">
+                                <li style="display:none;"><a href="#">Data Structures : CS 260</a></li>
+                                <li style="display:none;"><a href="#">Advanced Programming Tools and Techniques : CS 265</a></li>
+                                <li style="display:none;"><a href="#">Mathematical Foundations of Computer Science : CS 270</a></li>
+                                <li style="display:none;"><a href="#">Composition and Rhetoric I: Inquiry and Exploratory Research : ENGL 101</a></li>
+                                <li style="display:none;"><a href="#">Fundamentals of Physics I : PHYS 101</a></li>
+                                <li style="display:none;"><a href="#">Applied Biological Diversity, Ecology & Evolution : BIO 101</a></li>
+                                <li style="display:none;"><a href="#">Computer Programming I : CS 171</a></li>
+                                </ul>
 
                                 <canvas> </canvas>
                                 
@@ -58,4 +108,25 @@
                         </footer>
                 </div>
        </body>
+       <script>
+                function searchfunc() {
+                    var input, filter, ul, li, a, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    if (filter == "" || filter == " "){
+                            $("#myUL li").css('display', 'none');
+                    } else {
+                    ul = document.getElementById("myUL");
+                    li = ul.getElementsByTagName("li");
+                    for (i = 0; i < li.length; i++) {
+                        a = li[i].getElementsByTagName("a")[0];
+                        txtValue = a.textContent || a.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            li[i].style.display = "";
+                        } else {
+                            li[i].style.display = "none";
+                        }
+                    }}
+                    }
+        </script>
 </html>
