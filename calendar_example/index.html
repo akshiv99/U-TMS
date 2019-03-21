@@ -2,6 +2,7 @@
 <html>
   <head>
     <script type="text/javascript" src="event.js"></script>
+    <script type="text/javascript" src="delete.js"></script>
     <title>Google Calendar API Quickstart</title>
     <meta charset="utf-8" />
   </head>
@@ -13,7 +14,9 @@
     <button id="signout_button" style="display: none;">Sign Out</button>
 <iframe src="https://calendar.google.com/calendar/embed?src=ld8138069%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     <pre id="content" style="white-space: pre-wrap;"></pre>
+
     <button onclick="createCalEvent()">Create</button>
+    <button onclick= "deleteCalEvent()">Delete Event</button>
 
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
