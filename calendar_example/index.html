@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="event.js"></script>
     <title>Google Calendar API Quickstart</title>
     <meta charset="utf-8" />
@@ -14,6 +15,14 @@
 <iframe src="https://calendar.google.com/calendar/embed?src=ld8138069%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     <pre id="content" style="white-space: pre-wrap;"></pre>
     <button onclick="createCalEvent()">Create</button>
+
+
+    <script type="text/javascript">
+        $('iframe').on('load', function() {
+            console.log($('iframe').find("head"));
+            $('iframe').contents().find("head").append('<link rel="stylesheet" href="./index.css" />');
+        });
+    </script>
 
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
