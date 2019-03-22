@@ -80,15 +80,15 @@
                                         </div>
                                 </form>
                                 
-                                <input type="text" id="myInput" onkeyup="searchfunc()" placeholder="Search for courses in the list." title="Type in a name">
+                                <input type="text" id="myInput" onkeyup="searchfunc()" placeholder="Search for courses in the list." title="">
                                 <ul id="myUL">
-                                <li style="display:none;"><a href="#">Data Structures : CS 260</a></li>
-                                <li style="display:none;"><a href="#">Advanced Programming Tools and Techniques : CS 265</a></li>
-                                <li style="display:none;"><a href="#">Mathematical Foundations of Computer Science : CS 270</a></li>
-                                <li style="display:none;"><a href="#">Composition and Rhetoric I: Inquiry and Exploratory Research : ENGL 101</a></li>
-                                <li style="display:none;"><a href="#">Fundamentals of Physics I : PHYS 101</a></li>
-                                <li style="display:none;"><a href="#">Applied Biological Diversity, Ecology & Evolution : BIO 101</a></li>
-                                <li style="display:none;"><a href="#">Computer Programming I : CS 171</a></li>
+                                <li style="display:none;"><a href="#">Data Structures : CS 260 <button type="button" class="btn btn-dark select-btn" style="float:right">Select</button></a> </li>
+                                <li style="display:none;"><a href="#">Advanced Programming Tools and Techniques : CS 265 <button type="button" class="btn btn-dark select-btn" style="float:right">Select</button></a></li>
+                                <li style="display:none;"><a href="#">Mathematical Foundations of Computer Science : CS 270 <button type="button" class="btn btn-dark select-btn" style="float:right">Select</button></a></li>
+                                <li style="display:none;"><a href="#">Composition and Rhetoric I: Inquiry and Exploratory Research : ENGL 101 <button type="button" class="btn btn-dark select-btn" style="float:right">Select</button></a></li>
+                                <li style="display:none;"><a href="#">Fundamentals of Physics I : PHYS 101 <button type="button" class="btn btn-dark select-btn" style="float:right">Select</button></a></li>
+                                <li style="display:none;"><a href="#">Applied Biological Diversity, Ecology & Evolution : BIO 101 <button type="button" class="btn btn-dark select-btn" style="float:right">Select</button></a></li>
+                                <li style="display:none;"><a href="#">Computer Programming I : CS 171 <button type="button" class="btn btn-dark select-btn" style="float:right">Select</button></a></li>
                                 </ul>
 
                                 <canvas> </canvas>
@@ -96,10 +96,12 @@
                                 <p>
                                         List of CRNs
                                 </p>
+                        
+                                <h6> SELECTED COURSES:</h6>
+                                <ul class="list-group list-group-flush">
                                 
-                                <div>
-
-                                </div>
+                                </ul>
+                                        
                         
                         </section>
 
@@ -109,7 +111,8 @@
                 </div>
        </body>
        <script>
-                function searchfunc() {
+                var arr= [];
+                function searchfunc(){
                     var input, filter, ul, li, a, i, txtValue;
                     input = document.getElementById("myInput");
                     filter = input.value.toUpperCase();
@@ -126,7 +129,20 @@
                         } else {
                             li[i].style.display = "none";
                         }
-                    }}
                     }
+                }
+                }
+
+                $('.select-btn').on('click', function(){
+                        x=$(this).parent()[0].innerText;
+                        arr.push(x);
+                        $('.selectedlist').html('');
+                        for(var i= 0; i <arr.length; i++){
+                                $('.list-group').append('<li class="list-group-item">'+arr[i]+'<button type="button" class="btn btn-dark" onclick="remo()" style="float:right">Remove</button></li>');
+                }});
+                function remo(){
+                        console.log(",asdjsan")
+                }
+                
         </script>
 </html>
