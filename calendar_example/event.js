@@ -8,6 +8,7 @@ setTimeout( function(){
 );
 
 var event = {
+  'id': 'googleio',
   'summary': 'Google I/O 2019',
   'location': '800 Howard St., San Francisco, CA 94103',
   'description': 'A chance to hear more about Google\'s developer products.',
@@ -34,10 +35,29 @@ var event = {
     ]
   }
 };
-
+eventId = event.id;
+console.log(eventId);
 function createCalEvent(){
+  console.log('Hello');
+  console.log(eventId);
   request.execute(function() {
     appendPre('Event created!');
   });
 }
 
+function deleteCalEvent(eventId) {
+    gapi.client.load('calendar', 'v3', function() {
+        var request = gapi.client.calendar.events.delete({
+            'calendarId': 'primary',
+            'eventId': eventId
+        });
+        request.execute(function(response) {
+            if(response.error || response == false){
+                alert('Error');
+            }
+            else{
+                alert('Success');               
+            }
+        });
+    });
+}
