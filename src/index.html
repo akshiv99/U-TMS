@@ -16,13 +16,13 @@
                                 margin-bottom: 12px;
                         }
                         
-                        #myUL {
+                        #myUL, .list-group {
                                 list-style-type: none;
                                 padding: 0;
                                 margin: 0;
                         }
                         
-                        #myUL li a {
+                        #myUL li a, .list-group li a {
                                 
                                 border: 1px solid #ddd;
                                 margin-top: -1px; /* Prevent double borders */
@@ -34,7 +34,7 @@
                                 display: block
                         }
                         
-                        #myUL li a:hover:not(.header) {
+                        #myUL li a:hover:not(.header), .list-group li a:hover:not(.header) {
                                 background-color: #eee;
                         }
                         </style>
@@ -43,6 +43,7 @@
                 <title>Page Title</title>
                 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                <script src="./main.js"></script>
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
                 <link rel="stylesheet" href="../build/index.css">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,48 +60,34 @@
                                         <div class="form-group">
                                                 <label>What's your personality?</label>
                                                 <div class="form-check">
-                                                        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+                                                        <input class="form-check-input position-static" type="radio" name="time" id="earlybird" value="early" checked aria-label="...">
                                                         <label class="form-check-label" for="exampleRadios1">
                                                                 Early Bird
                                                         </label>
                                                 </div>
                                                 <div class="form-check">
-                                                        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+                                                        <input class="form-check-input position-static" type="radio" name="time" id="nightowl" value="late" aria-label="...">
                                                         <label class="form-check-label" for="exampleRadios1">
                                                                 Night Owl
                                                         </label>
                                                 </div>
-                                                <div class="form-check">
-                                                        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-                                                        <label class="form-check-label" for="exampleRadios1">
-                                                                Always Sleepy Sloth
-                                                        </label>
-                                                <label>What</label>
-                                                </div>
                                         </div>
                                 </form>
                                 
-                                <input type="text" id="myInput" onkeyup="searchfunc()" placeholder="Search for courses in the list." title="Type in a name">
+                                <input type="text" id="myInput" onkeyup="searchfunc()" placeholder="Search for courses in the list." title="">
                                 <ul id="myUL">
-                                <li style="display:none;"><a href="#">Data Structures : CS 260</a></li>
-                                <li style="display:none;"><a href="#">Advanced Programming Tools and Techniques : CS 265</a></li>
-                                <li style="display:none;"><a href="#">Mathematical Foundations of Computer Science : CS 270</a></li>
-                                <li style="display:none;"><a href="#">Composition and Rhetoric I: Inquiry and Exploratory Research : ENGL 101</a></li>
-                                <li style="display:none;"><a href="#">Fundamentals of Physics I : PHYS 101</a></li>
-                                <li style="display:none;"><a href="#">Applied Biological Diversity, Ecology & Evolution : BIO 101</a></li>
-                                <li style="display:none;"><a href="#">Computer Programming I : CS 171</a></li>
+                                
                                 </ul>
 
                                 <canvas> </canvas>
-                                
-                                <p>
-                                        List of CRNs
-                                </p>
-                                
-                                <div>
-
-                                </div>
                         
+                                <h6> SELECTED COURSES:</h6>
+                                <ul class="list-group list-group-flush">
+                                
+                                </ul>
+                                        
+                                <button onclick="generate(arr)" type="button" class="btn btn-dark">generate</button>
+
                         </section>
                         <section>
 
@@ -231,7 +218,8 @@
                 </div>
        </body>
        <script>
-                function searchfunc() {
+                var arr= [];
+                function searchfunc(){
                     var input, filter, ul, li, a, i, txtValue;
                     input = document.getElementById("myInput");
                     filter = input.value.toUpperCase();
@@ -248,7 +236,27 @@
                         } else {
                             li[i].style.display = "none";
                         }
-                    }}
                     }
+                }
+                }
+
+                setTimeout(
+                        function() {
+                                $('.select-btn').on('click', function(){
+                                        $('.list-group').html('');
+                                
+                                        x=$(this).parent()[0].innerText;
+                                        if (arr.includes(x) == false) {
+                                                arr.push(x);
+                                        }
+                                        for(var i= 0; i <arr.length; i++){
+                                                $('.list-group').append('<li class="list-group-item">'+arr[i].substring(0, arr[i].indexOf("Select"))+'<button type="button" class="btn btn-dark" onclick="remo()" style="float:right">Remove</button></li>');
+                                }});
+                        }, 1000);
+
+                function remo(){
+                        console.log(",asdjsan")
+                }
+                
         </script>
 </html>
