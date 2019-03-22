@@ -25,6 +25,12 @@ var con = mysql.createConnection({
     }
 });
 
+app.post('/getall', function(req, res){
+    con.query('SELECT DISTINCT course_title, subject_code, course_number FROM tms;', function(err, rows, fields){
+        res.send(rows);
+    })
+});
+
 app.post('/courses', function(req, res){
     con.query('SELECT DISTINCT course_title FROM TMS', function(err, rows, fields) {
         res.send(rows);
