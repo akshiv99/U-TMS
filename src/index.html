@@ -60,23 +60,16 @@
                                         <div class="form-group">
                                                 <label>What's your personality?</label>
                                                 <div class="form-check">
-                                                        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+                                                        <input class="form-check-input position-static" type="radio" name="time" id="earlybird" value="early" checked aria-label="...">
                                                         <label class="form-check-label" for="exampleRadios1">
                                                                 Early Bird
                                                         </label>
                                                 </div>
                                                 <div class="form-check">
-                                                        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+                                                        <input class="form-check-input position-static" type="radio" name="time" id="nightowl" value="late" aria-label="...">
                                                         <label class="form-check-label" for="exampleRadios1">
                                                                 Night Owl
                                                         </label>
-                                                </div>
-                                                <div class="form-check">
-                                                        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-                                                        <label class="form-check-label" for="exampleRadios1">
-                                                                Always Sleepy Sloth
-                                                        </label>
-                                                <label>What</label>
                                                 </div>
                                         </div>
                                 </form>
@@ -87,17 +80,14 @@
                                 </ul>
 
                                 <canvas> </canvas>
-                                
-                                <p>
-                                        List of CRNs
-                                </p>
                         
                                 <h6> SELECTED COURSES:</h6>
                                 <ul class="list-group list-group-flush">
                                 
                                 </ul>
                                         
-                        
+                                <button onclick="generate(arr)" type="button" class="btn btn-dark">generate</button>
+
                         </section>
 
                         <footer>
@@ -128,13 +118,20 @@
                 }
                 }
 
-                $('.select-btn').on('click', function(){
-                        x=$(this).parent()[0].innerText;
-                        arr.push(x);
-                        $('.selectedlist').html('');
-                        for(var i= 0; i <arr.length; i++){
-                                $('.list-group').append('<li class="list-group-item">'+arr[i]+'<button type="button" class="btn btn-dark" onclick="remo()" style="float:right">Remove</button></li>');
-                }});
+                setTimeout(
+                        function() {
+                                $('.select-btn').on('click', function(){
+                                        $('.list-group').html('');
+                                
+                                        x=$(this).parent()[0].innerText;
+                                        if (arr.includes(x) == false) {
+                                                arr.push(x);
+                                        }
+                                        for(var i= 0; i <arr.length; i++){
+                                                $('.list-group').append('<li class="list-group-item">'+arr[i].substring(0, arr[i].indexOf("Select"))+'<button type="button" class="btn btn-dark" onclick="remo()" style="float:right">Remove</button></li>');
+                                }});
+                        }, 1000);
+
                 function remo(){
                         console.log(",asdjsan")
                 }

@@ -10,6 +10,7 @@ var mysql = require("mysql");
 
 // setting up the database
 var con = mysql.createConnection({
+    multipleStatements: true,
     host: "localhost",
     port: "3306",
     user: "root",
@@ -31,9 +32,21 @@ app.post('/getall', function(req, res){
     })
 });
 
-app.post('/courses', function(req, res){
-    con.query('SELECT DISTINCT course_title FROM TMS', function(err, rows, fields) {
-        res.send(rows);
+
+
+app.post('/create', function(req, res){
+    con.query('DROP TABLE IF EXISTS times; DROP TABLE IF EXISTS list; DROP TABLE IF EXISTS CRN; DROP TABLE IF EXISTS final;', function(err, rows, fields) {
+        con.query('CREATE TABLE times SELECT * FROM tms WHERE time_from ' + req.body.times + " AND (" + req.body.classes + ");", function(err, rows, fields){
+            con.query('CREATE TABLE list Select concat (Days, " ", TIME_FROM) as TI, CRN from times;', function(err, rows, fields){
+                con.query('CREATE TABLE CRN SELECT * FROM list GROUP BY TI;', function(err, rows, fields){
+                    con.query('CREATE TABLE final SELECT * FROM times WHERE CRN in (SELECT CRN from CRN) GROUP BY course_number;', function(err, rows, fields){
+                        con.query('SELECT * FROM final', function(err, rows, fields){
+                            res.send(rows);
+                        });
+                    });
+                });
+            });
+        });
     });
 });
 
