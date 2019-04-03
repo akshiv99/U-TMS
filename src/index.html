@@ -48,6 +48,10 @@
                         #myUL li a:hover:not(.header), .list-group li a:hover:not(.header) {
                                 background-color: #eee;
                         }
+
+                        section {
+                                padding-bottom: 25px;
+                        }
                 </style>
         </head>
         <body>
@@ -94,11 +98,15 @@
                         <section>
 
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
+    <button id="authorize_button" class="btn btn-dark" style="display: none;">Authorize</button>
+    <button id="signout_button" class="btn btn-dark" style="display: none;">Sign Out</button>
    <iframe src="https://calendar.google.com/calendar/embed?src=ld8138069%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-    <pre id="content" style="white-space: pre-wrap;"></pre>
-
+    <pre id="content" style="white-space: pre-wrap; display: none;"></pre>
+        <div id="CRN">
+             <p>
+                     List of CRNs
+             </p>
+        </div>
         </section>
 
         <footer>
@@ -110,7 +118,7 @@
                 
     <script type="text/javascript">
         // Client ID and API key from the Developer Console
-        var CLIENT_ID = '899102673476-ebft3j5l13la54h4o0ngrrr780vlsqv5.apps.googleusercontent.com';
+        var CLIENT_ID = '899102673476-5hbu46608ik341uekpdgg3d0eencbdh7.apps.googleusercontent.com';
         var API_KEY = 'AIzaSyBb-afdtuVLuzU4lUaC8gcCh3EgLkFcOxk';
         // Array of API discovery doc URLs for APIs used by the quickstart
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
@@ -242,7 +250,8 @@
                     }
                 }
                 }
-
+                
+                function e(){
                 setTimeout(
                         function() {
                                 $('.select-btn').on('click', function(){
@@ -253,12 +262,31 @@
                                                 arr.push(x);
                                         }
                                         for(var i= 0; i <arr.length; i++){
-                                                $('.list-group').append('<li class="list-group-item">'+arr[i].substring(0, arr[i].indexOf("Select"))+'<button type="button" class="btn btn-dark" onclick="remo()" style="float:right">Remove</button></li>');
-                                }});
-                        }, 1000);
+                                                $('.list-group').append('<li class="list-group-item">'+arr[i].substring(0, arr[i].indexOf("Select"))+'<button type="button" class="btn btn-dark remove-btn" style="float:right">Remove</button></li>');
+                                        
+                                        f();
+                                        }});
+                }, 1500);
+               }
 
-                function remo(){
-                        console.log(",asdjsan")
+                function f(){
+                        setTimeout(function(){
+                                        $('.remove-btn').on('click', function(){
+                                                var str = $(this).parent()[0].innerHTML.substring(0, $(this).parent()[0].innerHTML.indexOf('<'));
+                                                for (var i = 0; i < arr.length; i++){
+                                                        if (arr[i].includes(str)) {
+                                                                arr.splice(i, 1);
+                                                                break;
+                                                        }
+                                                }
+
+                                                $('.list-group').html('');
+                                                for (var i= 0; i <arr.length; i++){
+                                                     $('.list-group').append('<li class="list-group-item">'+arr[i].substring(0, arr[i].indexOf("Select"))+'<button type="button" class="btn btn-dark remove-btn" style="float:right">Remove</button></li>');
+                                                }
+                                                e();
+                                });
+                                }, 1500);
                 }
                 
         </script>

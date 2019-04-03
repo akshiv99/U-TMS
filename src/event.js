@@ -1,52 +1,32 @@
 var request;
-
+var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 function eventCreation(rows) {
   for (var i = 0; i < rows.length; i++) {
-
+    console.log(rows[i]);
       var event = {
-        'id': rows[i].SUBJECT_CODE + " " + rows[i].COURSE_NUMBER,
+        'id': 'event275' + i,
         'summary': rows[i].COURSE_TITLE,
-        'location': '',
+        'location': 'Drexel',
         'description': rows[i].INSTRUCTOR + ", " + rows[i].METHOD + ", " + rows[i].TYPE ,
         'start': {
-          'dateTime': '2019-03-18T' + rows[i].TIME_FROM.toString().substring(0, 2) + ":" + rows[i].TIME_FROM.toString().substring(2, rows[i].TIME_FROM.length) + ":00",
-          'timeZone': 'America/Los_Angeles'
+          'dateTime': '2019-03-' + (17+weekdays.indexOf(rows[i].DAYS)) + 'T' + rows[i].TIME_FROM.toString().substring(0, 2) + ":" + rows[i].TIME_FROM.toString().substring(2, rows[i].TIME_FROM.length) + ":00",
+          'timeZone': 'America/New_York'
         },
         'end': {
-          'dateTime': '2019-03-18T' + rows[i].TIME_FROM.toString().substring(0, 2) + ":" + rows[i].TIME_FROM.toString().substring(2, rows[i].TIME_FROM.length) + ":00",
-          'timeZone': 'America/Los_Angeles'
-        },
-        'recurrence': [
-          'RRULE:FREQ=WEEKLY;COUNT=2'
-        ]
+          'dateTime': '2019-03-' + (17+weekdays.indexOf(rows[i].DAYS)) + 'T' + rows[i].TIME_TO.toString().substring(0, 2) + ":" + rows[i].TIME_TO.toString().substring(2, rows[i].TIME_TO.length) + ":00",
+          'timeZone': 'America/New_York'
+        }
       };
-      eventId = event.id;    
+  
+      
+          $('#CRN').append(rows[i].CRN + '\n');
 
-        request = gapi.client.calendar.events.insert({
-          'calendarId': 'primary',
-          'resource': event
-        });
-
-        request.execute(function() {
-          appendPre('Event created!');
-        });
-      }
-}
-
-
-function deleteCalEvent(eventId) {
-    gapi.client.load('calendar', 'v3', function() {
-        var request = gapi.client.calendar.events.delete({
+          request = gapi.client.calendar.events.insert({
             'calendarId': 'primary',
-            'eventId': eventId
-        });
-        request.execute(function(response) {
-            if(response.error || response == false){
-                alert('Error');
-            }
-            else{
-                alert('Success');               
-            }
-        });
-    });
-}
+            'resource': event
+          });
+
+          request.execute(function() {
+            appendPre(' ');
+          });
+}}
